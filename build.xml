@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="CTCI" default="compile" basedir=".">
-  <!-- ANT will start execution from here by finding target "compile"  -->
-  <target name="compile" depends="clean">
-    <!-- Java compile parameters here  -->
-    <javac debug="true" debuglevel="lines,vars,source" srcdir="src" destdir="bin" />
+
+  <!-- Set property variables -->
+  <property name="src.dir" location="src" />
+  <property name="build.dir" location="bin" />
+
+  <!-- CLEAN -->
+  <target name="clean">
+    <delete dir="${build.dir}" />
   </target>
 
-  <!-- "compile" target depends on "clean" so It'll delete "bin" folder if exists and
-        create new "bin" folder for compiles class file -->
-  <target name="clean">
-    <delete dir="bin" />
-    <mkdir dir="bin" />
+  <!-- MKDIR -->
+  <target name="makedir">
+    <mkdir dir="${build.dir}" />
+  </target>
+
+  <!-- BUILD -->
+  <target name="compile" depends="clean, makedir">
+    <!-- Java compile parameters here  -->
+    <javac
+      debug="true"
+      debuglevel="lines,vars,source"
+      srcdir="${src.dir}"
+      destdir="${build.dir}"
+      includeantruntime="false"
+      />
   </target>
 </project>
 
